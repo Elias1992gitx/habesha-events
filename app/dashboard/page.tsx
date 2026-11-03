@@ -11,9 +11,7 @@ import {
   Monitor,
 } from "lucide-react";
 
-// ---------------------------------------------------------------------------
-// Server action — sign out
-// ---------------------------------------------------------------------------
+
 async function signOut() {
   "use server";
   const supabase = await createClient();
@@ -36,9 +34,7 @@ interface Invitation {
   date: string;
 }
 
-// ---------------------------------------------------------------------------
-// Page (Server Component)
-// ---------------------------------------------------------------------------
+
 export default async function DashboardPage() {
   const supabase = await createClient();
 
