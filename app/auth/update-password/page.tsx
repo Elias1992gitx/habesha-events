@@ -7,7 +7,6 @@ import { ArrowRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 export default function UpdatePasswordPage() {
-  const supabase = createClient();
   const router = useRouter();
 
   const [password, setPassword] = useState("");
@@ -21,6 +20,7 @@ export default function UpdatePasswordPage() {
     setMessage("");
     setIsError(false);
 
+    const supabase = createClient();
     const { error } = await supabase.auth.updateUser({ password });
 
     setLoading(false);

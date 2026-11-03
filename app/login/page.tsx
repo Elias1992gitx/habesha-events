@@ -7,7 +7,6 @@ import { ArrowRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
-  const supabase = createClient();
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -20,6 +19,7 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
 
+    const supabase = createClient();
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
