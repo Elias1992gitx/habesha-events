@@ -42,8 +42,7 @@ export const am: Translations = {
     occasionsKicker: "ለመሰብሰብ በቂ ምክንያቶች",
     occasionsTitle: "አጋጣሚዎን",
     occasionsTitleAccent: "ይምረጡ።",
-    occasionsSubtitle:
-      "ወዳጅ ዘመድዎ የሚያስታውሱትን ልዩ ጊዜ የሚያደምቁ አብነቶችና ቃላት።",
+    occasionsSubtitle: "ወዳጅ ዘመድዎ የሚያስታውሱትን ልዩ ጊዜ የሚያደምቁ አብነቶችና ቃላት።",
     explore: "ተመልከት",
     exploring: "እየተመለከቱት ያለው",
     events: {
@@ -115,8 +114,7 @@ export const am: Translations = {
     pricingKicker: "ለሁሉም በዓል የሚስማሙ አማራጮች",
     pricingTitle: "በሁሉም ደረጃ",
     pricingTitleAccent: "ውብና ማራኪ።",
-    pricingSubtitle:
-      "በቀላሉ ይጀምሩ፣ ከዚያም ግብዣዎን ሙሉ ለሙሉ የእርስዎ የሚያደርጉትን ዝርዝሮች ያክሉ።",
+    pricingSubtitle: "በቀላሉ ይጀምሩ፣ ከዚያም ግብዣዎን ሙሉ ለሙሉ የእርስዎ የሚያደርጉትን ዝርዝሮች ያክሉ።",
     learnMore: "ተጨማሪ ይመልከቱ",
     plans: {
       starter: {
@@ -148,8 +146,7 @@ export const am: Translations = {
     manageSubtitle: "ግብዣዎችዎን፣ እንግዶችዎን እና ክፍያዎችዎን ያስተዳድሩ።",
     newInvitation: "አዲስ ግብዣ",
     emptyTitle: "የመጀመሪያው ግብዣዎ ይጠብቅዎታል።",
-    emptySubtitle:
-      "ውብ ግብዣ ያዘጋጁና ልዩ ቀንዎን ከቤተሰብ እና ከወዳጆችዎ ጋር ያካፍሉ።",
+    emptySubtitle: "ውብ ግብዣ ያዘጋጁና ልዩ ቀንዎን ከቤተሰብ እና ከወዳጆችዎ ጋር ያካፍሉ።",
     createFirstInvitation: "የመጀመሪያዎን ግብዣ ያዘጋጁ",
     status: {
       draft: "ረቂቅ",
@@ -171,6 +168,79 @@ export const am: Translations = {
       logout: "ውጣ",
     },
   },
+  newInvitation: {
+    backToDashboard: "ወደ ዳሽቦርድ ይመለሱ",
+    step1Title: "ምን ዓይነት ዝግጅት እያዘጋጁ ነው?",
+    step1Subtitle: "የበዓልዎን ዓይነት ይምረጡ፤ በባህላዊ ውበትና ክብር የተዘጋጁ ማራኪ አብነቶችን ያስሱ።",
+    step1Kicker: "ደረጃ 01 · የበዓል ዓይነት",
+    step2Title: "የግብዣ አብነትዎን ይምረጡ",
+    step2Subtitle:
+      "የተመረጡትን ውብ የዲጂታል ግብዣ አብነቶች ይመልከቱ። በሙሉ ስክሪን አስቀድመው ይሞክሩ ወይም ይምረጡ።",
+    step2Kicker: "ደረጃ 02 · ዲዛይን ይምረጡ",
+    step3Title: "ረቂቅ ግብዣዎን ያጠናቅቁ",
+    step3Subtitle:
+      "ለበዓልዎ ርዕስና ቀን ይስጡ። ማንኛውንም ዝርዝርና የእንግዶች ዝርዝር በዳሽቦርድዎ ላይ በማንኛውም ጊዜ ማስተካከል ይችላሉ።",
+    step3Kicker: "ደረጃ 03 · ዝርዝሮችን ያጠናቅቁ",
+    stepBadge1: "1. የበዓል ዓይነት",
+    stepBadge2: "2. የአብነቶች ማዕከል",
+    stepBadge3: "3. ማበጀት",
+    changeEventType: "የበዓል ዓይነት ይቀይሩ",
+    filterAll: "ሁሉም አብነቶች",
+    filterWedding: "ሠርግ",
+    filterBirthday: "ልደት",
+    filterGraduation: "ምርቃት",
+    previewBtn: "ቅድመ-ዕይታ",
+    selectTemplateBtn: "ይህን አብነት ምረጥ",
+    selectedBadge: "የተመረጠ",
+    useThisTemplate: "ይህን አብነት ተጠቀም",
+    desktopView: "የኮምፒውተር ዕይታ",
+    mobileView: "የስልክ ዕይታ",
+    closePreview: "ዝጋ",
+    templateDetails: "የአብነቱ ዝርዝር መረጃ",
+    featuresIncluded: "የተካተቱ አገልግሎቶች",
+    continueWithTemplate: "በዚህ አብነት ይቀጥሉ",
+    eventTitleLabel: "የግብዣው ርዕስ / የባለቤቶች ስም",
+    eventDateLabel: "የበዓሉ ቀን",
+    eventTitlePlaceholder: "ለምሳሌ፡ የሳራ እና ዳዊት የሠርግ ጥሪ",
+    createDraftBtn: "ረቂቅ ግብዣ ፍጠር",
+    creatingDraftBtn: "ረቂቅ እየተፈጠረ ነው...",
+    successTitle: "ረቂቅ ግብዣዎ ተዘጋጅቷል!",
+    successSubtitle:
+      "አሁን ዝርዝሮችን ማስተካከል፣ ፎቶዎችን ማከል፣ እንግዶችን ማስተዳደር እና ሊንኩን ማጋራት ይችላሉ።",
+    viewInDashboard: "ወደ ዳሽቦርድ ሂድ",
+    photoLabel: "የግብዣው ማዕከላዊ ፎቶ",
+    photoHint:
+      "እያንዳንዱ አብነት የኢትዮጵያን ባህልና ወግ የሚያንጸባርቅ ነባሪ ምሳሌ ፎቶ አለው። እንዳለ መጠቀም ወይም በራስዎ ፎቶ መተካት ይችላሉ።",
+    uploadPhotoBtn: "ፎቶ ጫን",
+    changePhotoBtn: "ፎቶ ቀይር",
+    resetPhotoBtn: "ወደ ባህላዊ ነባሪ ፎቶ መልስ",
+    defaultPhotoBadge: "ነባሪ ባህላዊ ፎቶ",
+    customPhotoBadge: "የእርስዎ ፎቶ",
+    dragDropText: "ፎቶ ለመምረጥ ይጫኑ ወይም እዚህ ይጎትቱ (JPG፣ PNG፣ WebP እስከ 10MB)",
+    culturalPreviewBadge: "ባህላዊ ምሳሌ ፎቶ",
+    culturalPlaceholderNotice:
+      "ነባሪ የኢትዮጵያ ባህላዊ ፎቶ። ግብዣዎን ሲያበጁ በራስዎ ፎቶ መተካት ይችላሉ።",
+    eventTypes: {
+      wedding: {
+        title: "ሠርግ",
+        titleAm: "ሠርግ",
+        desc: "የተቀደሰውን የጋብቻ ቃልኪዳንና ፍቅርዎን በውብ የሐበሻ ክብርና ውበት ያክብሩ።",
+        badge: "ተወዳጅ",
+      },
+      birthday: {
+        title: "ልደት",
+        titleAm: "ልደት",
+        desc: "እያንዳንዱን የዕድሜ ምዕራፍ ከቤተሰብና ወዳጆች ጋር በደስታና በልዩ ድምቀት ያክብሩ።",
+        badge: "የደስታ ቀን",
+      },
+      graduation: {
+        title: "ምርቃት",
+        titleAm: "ምርቃት",
+        desc: "ድካምዎን፣ ታላቁን የትምህርት ጉዞዎንና ቀጣዩን ብሩህ ተስፋዎን በክብር ያክብሩ።",
+        badge: "ታላቅ ስኬት",
+      },
+    },
+  },
   auth: {
     loginTitle: "እንኳን ደህና",
     loginTitleAccent: "መጡ።",
@@ -184,22 +254,19 @@ export const am: Translations = {
     registerEyebrow: "ጥሪ",
     registerTitle: "መለያዎን",
     registerTitleAccent: "ይፍጠሩ።",
-    registerSubtitle:
-      "የሐበሻ ኢቨንትስ ቤተሰብ ይሁኑና በደቂቃዎች ውስጥ ውብ ግብዣዎችን ማዘጋጀት ይጀምሩ።",
+    registerSubtitle: "የሐበሻ ኢቨንትስ ቤተሰብ ይሁኑና በደቂቃዎች ውስጥ ውብ ግብዣዎችን ማዘጋጀት ይጀምሩ።",
     passwordMin: "ቢያንስ 8 ፊደላት ወይም ቁጥሮች",
     createAccount: "መለያ ይፍጠሩ",
     creatingAccount: "መለያ በመፍጠር ላይ…",
     termsNotice: "በመመዝገብዎ በእኛ",
     and: "እና",
     almostThere: "ጥቂት ቀርቷል።",
-    checkEmail:
-      "ኢሜይልዎን ይመልከቱ — መለያዎን ለማረጋገጥ የማረጋገጫ ሊንክ ልከንልዎታል።",
+    checkEmail: "ኢሜይልዎን ይመልከቱ — መለያዎን ለማረጋገጥ የማረጋገጫ ሊንክ ልከንልዎታል።",
     checkSpam: "ሊንኩ አልደረሰዎትም? የስፓም (spam) ፎልደርዎን ይመልከቱ።",
     resetEyebrow: "ምስጢር ቃል",
     resetTitle: "የይለፍ ቃልዎን",
     resetTitleAccent: "ይቀይሩ።",
-    resetSubtitle:
-      "የኢሜይል አድራሻዎን ያስገቡ፤ አዲስ የይለፍ ቃል የሚያዘጋጁበትን ሊንክ እንልክልዎታለን።",
+    resetSubtitle: "የኢሜይል አድራሻዎን ያስገቡ፤ አዲስ የይለፍ ቃል የሚያዘጋጁበትን ሊንክ እንልክልዎታለን።",
     sendResetLink: "የማደሻ ሊንክ ላክ",
     sending: "በመላክ ላይ…",
     backToSignIn: "ወደ መግቢያ ተመለስ",
@@ -218,4 +285,3 @@ export const am: Translations = {
     },
   },
 };
-

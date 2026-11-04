@@ -168,12 +168,12 @@ export function MarketingHome() {
             >
               {t.nav.occasions}
             </a>
-            <a
-              href="#templates"
+            <Link
+              href="/templates"
               className="transition-colors hover:text-[#9f382f]"
             >
               {t.nav.templates}
-            </a>
+            </Link>
             <a
               href="#how-it-works"
               className="transition-colors hover:text-[#9f382f]"
@@ -228,9 +228,9 @@ export function MarketingHome() {
               <a href="#occasions" onClick={() => setMenuOpen(false)}>
                 {t.nav.occasions}
               </a>
-              <a href="#templates" onClick={() => setMenuOpen(false)}>
+              <Link href="/templates" onClick={() => setMenuOpen(false)}>
                 {t.nav.templates}
-              </a>
+              </Link>
               <a href="#how-it-works" onClick={() => setMenuOpen(false)}>
                 {t.nav.howItWorks}
               </a>
@@ -965,16 +965,16 @@ export function MarketingHome() {
                 {t.home.galleryTitle} <em>{t.home.galleryTitleAccent}</em>
               </h2>
             </div>
-            <a
-              href="#start"
-              className="flex items-center gap-2 text-sm text-[#e8b5a1]"
+            <Link
+              href="/templates"
+              className="flex items-center gap-2 text-sm text-[#e8b5a1] hover:underline"
             >
               {t.home.seeAllTemplates} <ArrowRight className="size-4" />
-            </a>
+            </Link>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {templates.map((template) => (
-              <a href="#start" key={template.name} className="group">
+              <Link href="/templates" key={template.name} className="group">
                 <div className={`template-card ${template.className}`}>
                   <div className="template-inner">
                     <span className="font-geez text-sm font-medium text-[#9f382f]">ጥሪ</span>
@@ -999,7 +999,7 @@ export function MarketingHome() {
                     {isAmharic ? template.typeAm : template.type}
                   </span>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>

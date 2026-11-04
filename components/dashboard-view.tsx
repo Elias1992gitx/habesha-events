@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   LayoutGrid,
   User as UserIcon,
@@ -24,6 +26,7 @@ export interface Invitation {
   template: string;
   plan: string;
   date: string;
+  photo?: string;
 }
 
 interface DashboardViewProps {
@@ -40,6 +43,26 @@ export function DashboardView({
   signOutAction,
 }: DashboardViewProps) {
   const { t, isAmharic } = useLanguage();
+  const [allInvitations, setAllInvitations] = useState<Invitation[]>(invitations);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("habesha_invitations");
+      if (stored) {
+        const parsed: Invitation[] = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setAllInvitations((prev) => {
+            const map = new Map<string, Invitation>();
+            // custom created first, then server
+            [...parsed, ...prev].forEach((item) => map.set(item.id, item));
+            return Array.from(map.values());
+          });
+        }
+      }
+    } catch {
+      // localStorage not available or parse error
+    }
+  }, []);
 
   const getStatusText = (status: InvitationStatus) => {
     switch (status) {
@@ -156,7 +179,7 @@ export function DashboardView({
           </div>
 
           <Link
-            href="#"
+            href="/dashboard/new"
             className="flex shrink-0 items-center gap-1.5 rounded-lg bg-[#e15c51] px-4 py-2.5 text-[13px] font-medium text-white no-underline shadow-sm transition-all hover:bg-[#d44c41]"
           >
             <Plus size={15} />
@@ -165,7 +188,7 @@ export function DashboardView({
         </div>
 
         <section className="mt-10" aria-label="Invitations">
-          {invitations.length === 0 ? (
+          {allInvitations.length === 0 ? (
             <div className="flex flex-col items-center rounded-2xl border border-[#262320]/10 bg-[#f0ece6]/70 px-6 py-20 text-center dark:border-white/[0.08] dark:bg-[#161820]/70">
               <span className="flex size-14 items-center justify-center rounded-full bg-[#e15c51]/10 text-[#e15c51]">
                 <Plus size={24} />
@@ -177,7 +200,7 @@ export function DashboardView({
                 {t.dashboard.emptySubtitle}
               </p>
               <Link
-                href="#"
+                href="/dashboard/new"
                 className="mt-6 flex items-center gap-1.5 rounded-lg bg-[#e15c51] px-4 py-2.5 text-[13px] font-medium text-white no-underline transition-all hover:bg-[#d44c41]"
               >
                 <Plus size={15} />
@@ -186,43 +209,55 @@ export function DashboardView({
             </div>
           ) : (
             <div className="flex flex-col gap-3.5">
-              {invitations.map((inv) => (
+              {allInvitations.map((inv) => (
                 <article
                   key={inv.id}
                   className="flex flex-col items-start justify-between gap-5 rounded-2xl border border-[#262320]/15 bg-white/80 p-5 dark:border-[#23262e] dark:bg-[#161820]/80 sm:flex-row sm:items-center sm:px-6 sm:py-5"
                 >
-                  <div>
-                    <div className="flex items-center gap-3">
-                      <span className="font-serif text-xl tracking-[-0.02em] text-[#262320] dark:text-[#f5f6f8] sm:text-2xl">
-                        {inv.couple1}
-                        <span className={`mx-2 text-[#9b7e68] ${isAmharic ? "font-geez font-normal not-italic text-sm" : "font-serif font-light italic"}`}>
-                          {isAmharic ? "እና" : "&"}
+                  <div className="flex items-center gap-4">
+                    {inv.photo && (
+                      <div className="relative size-14 shrink-0 overflow-hidden rounded-xl border border-[#262320]/15 shadow-xs dark:border-white/10">
+                        <Image
+                          src={inv.photo}
+                          alt={inv.couple1}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                    <div>
+                      <div className="flex items-center gap-3">
+                        <span className="font-serif text-xl tracking-[-0.02em] text-[#262320] dark:text-[#f5f6f8] sm:text-2xl">
+                          {inv.couple1}
+                          <span className={`mx-2 text-[#9b7e68] ${isAmharic ? "font-geez font-normal not-italic text-sm" : "font-serif font-light italic"}`}>
+                            {isAmharic ? "እና" : "&"}
+                          </span>
+                          {inv.couple2}
                         </span>
-                        {inv.couple2}
-                      </span>
-                      <span className="rounded-full border border-[#262320]/15 bg-[#262320]/[0.04] px-2.5 py-0.5 text-[11px] font-normal text-[#59534d] dark:border-white/10 dark:bg-white/[0.04] dark:text-[#8f96a3]">
-                        {getStatusText(inv.status)}
-                      </span>
-                    </div>
+                        <span className="rounded-full border border-[#262320]/15 bg-[#262320]/[0.04] px-2.5 py-0.5 text-[11px] font-normal text-[#59534d] dark:border-white/10 dark:bg-white/[0.04] dark:text-[#8f96a3]">
+                          {getStatusText(inv.status)}
+                        </span>
+                      </div>
 
-                    <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-1 text-xs text-[#59534d] dark:text-[#787f8f] sm:text-[13px]">
-                      <div>
-                        <span>{t.dashboard.fields.template}</span>{" "}
-                        <span className="font-medium text-[#262320] dark:text-[#d3d7e0]">
-                          {inv.template}
-                        </span>
-                      </div>
-                      <div>
-                        <span>{t.dashboard.fields.plan}</span>{" "}
-                        <span className="font-medium text-[#262320] dark:text-[#d3d7e0]">
-                          {inv.plan}
-                        </span>
-                      </div>
-                      <div>
-                        <span>{t.dashboard.fields.date}</span>{" "}
-                        <span className="font-medium text-[#262320] dark:text-[#d3d7e0]">
-                          {inv.date}
-                        </span>
+                      <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-1 text-xs text-[#59534d] dark:text-[#787f8f] sm:text-[13px]">
+                        <div>
+                          <span>{t.dashboard.fields.template}</span>{" "}
+                          <span className="font-medium text-[#262320] dark:text-[#d3d7e0]">
+                            {inv.template}
+                          </span>
+                        </div>
+                        <div>
+                          <span>{t.dashboard.fields.plan}</span>{" "}
+                          <span className="font-medium text-[#262320] dark:text-[#d3d7e0]">
+                            {inv.plan}
+                          </span>
+                        </div>
+                        <div>
+                          <span>{t.dashboard.fields.date}</span>{" "}
+                          <span className="font-medium text-[#262320] dark:text-[#d3d7e0]">
+                            {inv.date}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>

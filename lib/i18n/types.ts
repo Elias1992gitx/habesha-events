@@ -162,6 +162,74 @@ export interface Translations {
       logout: string;
     };
   };
+  newInvitation: {
+    backToDashboard: string;
+    step1Title: string;
+    step1Subtitle: string;
+    step1Kicker: string;
+    step2Title: string;
+    step2Subtitle: string;
+    step2Kicker: string;
+    step3Title: string;
+    step3Subtitle: string;
+    step3Kicker: string;
+    stepBadge1: string;
+    stepBadge2: string;
+    stepBadge3: string;
+    changeEventType: string;
+    filterAll: string;
+    filterWedding: string;
+    filterBirthday: string;
+    filterGraduation: string;
+    previewBtn: string;
+    selectTemplateBtn: string;
+    selectedBadge: string;
+    useThisTemplate: string;
+    desktopView: string;
+    mobileView: string;
+    closePreview: string;
+    templateDetails: string;
+    featuresIncluded: string;
+    continueWithTemplate: string;
+    eventTitleLabel: string;
+    eventDateLabel: string;
+    eventTitlePlaceholder: string;
+    createDraftBtn: string;
+    creatingDraftBtn: string;
+    successTitle: string;
+    successSubtitle: string;
+    viewInDashboard: string;
+    photoLabel: string;
+    photoHint: string;
+    uploadPhotoBtn: string;
+    changePhotoBtn: string;
+    resetPhotoBtn: string;
+    defaultPhotoBadge: string;
+    customPhotoBadge: string;
+    dragDropText: string;
+    culturalPreviewBadge: string;
+    culturalPlaceholderNotice: string;
+    eventTypes: {
+      wedding: {
+        title: string;
+        titleAm: string;
+        desc: string;
+        badge: string;
+      };
+      birthday: {
+        title: string;
+        titleAm: string;
+        desc: string;
+        badge: string;
+      };
+      graduation: {
+        title: string;
+        titleAm: string;
+        desc: string;
+        badge: string;
+      };
+    };
+  };
   auth: {
     loginTitle: string;
     loginTitleAccent: string;
