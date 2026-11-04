@@ -1,6 +1,6 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
-@import 'shadcn/tailwind.css';
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -162,72 +162,478 @@
   }
 }
 
+body {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+:root {
+  --font-ethiopic-sans:
+    "Noto Sans Ethiopic", "Kefa", "Nyala", "Abyssinica SIL", system-ui,
+    sans-serif;
+  --font-ethiopic-serif:
+    "Noto Serif Ethiopic", "Nyala", "Abyssinica SIL", Georgia, serif;
+}
+
 @theme inline {
-  --font-serif: Georgia, 'Times New Roman', serif;
-  --font-geez: 'Noto Sans Ethiopic', 'Abyssinica SIL', sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-geez: var(--font-ethiopic-sans);
+  --font-geez-serif: var(--font-ethiopic-serif);
 }
 
-.font-serif { font-family: var(--font-serif); }
-.font-geez { font-family: var(--font-geez); }
+.font-serif {
+  font-family: var(--font-serif);
+}
+.font-geez {
+  font-family: var(--font-geez);
+  letter-spacing: 0.015em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+.font-geez-serif {
+  font-family: var(--font-geez-serif);
+  letter-spacing: 0.005em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
 
-@keyframes soft-float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-8px) rotate(.6deg); } }
-@keyframes hero-in { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-@keyframes shimmer { from { transform: translateX(-120%); } to { transform: translateX(120%); } }
-.hero-frame { animation: hero-in .8s cubic-bezier(.2,.8,.2,1) both; }
-.hero-card { animation: soft-float 5s ease-in-out 1s infinite; }
-.brand-mark { animation: soft-float 4s ease-in-out infinite; }
-.occasion-card { animation: hero-in .7s both; }
-.occasion-card:nth-child(2) { animation-delay: .08s; }
-.occasion-card:nth-child(3) { animation-delay: .16s; }
+/* -------------------------------------------------------------------------- */
+/* Amharic / Ethiopic Typography Scope                                        */
+/* Balanced sizes, weights, and leading applied when Amharic is active        */
+/* -------------------------------------------------------------------------- */
+html.lang-am,
+html[lang="am"] {
+  font-family: var(--font-geez);
+}
+
+html.lang-am body,
+html[lang="am"] body {
+  font-family: var(--font-geez);
+  letter-spacing: 0.008em;
+  line-height: 1.62;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hero / Display H1 in Amharic */
+html.lang-am h1,
+html[lang="am"] h1 {
+  font-family: var(--font-geez-serif), var(--font-geez);
+  letter-spacing: -0.015em !important;
+  line-height: 1.18 !important;
+  font-weight: 600;
+}
+
+html.lang-am h1.font-serif,
+html[lang="am"] h1.font-serif {
+  font-family: var(--font-geez-serif), var(--font-geez);
+  font-size: clamp(2.3rem, 5.2vw, 4.4rem) !important;
+  line-height: 1.18 !important;
+  letter-spacing: -0.015em !important;
+  font-weight: 600;
+}
+
+/* Section titles */
+html.lang-am .section-title,
+html[lang="am"] .section-title {
+  font-family: var(--font-geez-serif), var(--font-geez);
+  font-size: clamp(2rem, 3.8vw, 3.3rem) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+  font-weight: 600;
+}
+
+/* Section kickers & small badges */
+html.lang-am .section-kicker,
+html[lang="am"] .section-kicker {
+  font-family: var(--font-geez);
+  font-size: 11px;
+  letter-spacing: 0.06em !important;
+  font-weight: 600;
+}
+
+/* Secondary headings */
+html.lang-am h2,
+html[lang="am"] h2 {
+  font-family: var(--font-geez-serif), var(--font-geez);
+  letter-spacing: -0.01em !important;
+  line-height: 1.28 !important;
+  font-weight: 600;
+}
+
+html.lang-am h3,
+html[lang="am"] h3 {
+  font-family: var(--font-geez);
+  letter-spacing: 0 !important;
+  line-height: 1.32 !important;
+  font-weight: 600;
+}
+
+/* Body paragraphs in Amharic */
+html.lang-am p,
+html[lang="am"] p {
+  letter-spacing: 0.005em;
+  line-height: 1.68;
+}
+
+/* Form controls & labels */
+html.lang-am label,
+html[lang="am"] label {
+  font-family: var(--font-geez);
+  font-size: 11.5px;
+  letter-spacing: 0.04em !important;
+  font-weight: 600;
+}
+
+html.lang-am input,
+html[lang="am"] input,
+html.lang-am button,
+html[lang="am"] button {
+  font-family: var(--font-geez);
+}
+
+html.lang-am input::placeholder,
+html[lang="am"] input::placeholder {
+  font-family: var(--font-geez);
+  font-size: 13.5px;
+  letter-spacing: 0.005em;
+}
+
+/* Overwrite aggressive Latin negative tracking for Ethiopic */
+html.lang-am [class*="tracking-[-0.0"],
+html[lang="am"] [class*="tracking-[-0.0"] {
+  letter-spacing: -0.01em !important;
+}
+
+/* Overwrite aggressive Latin uppercase tracking (0.12em - 0.25em) */
+html.lang-am [class*="tracking-[0.1"],
+html[lang="am"] [class*="tracking-[0.1"],
+html.lang-am [class*="tracking-[0.2"],
+html[lang="am"] [class*="tracking-[0.2"] {
+  letter-spacing: 0.05em !important;
+}
+
+@keyframes soft-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.6deg);
+  }
+}
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes shimmer {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
+.hero-frame {
+  animation: hero-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.hero-card {
+  animation: soft-float 5s ease-in-out 1s infinite;
+}
+.brand-mark {
+  animation: soft-float 4s ease-in-out infinite;
+}
+.occasion-card {
+  animation: hero-in 0.7s both;
+}
+.occasion-card:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.occasion-card:nth-child(3) {
+  animation-delay: 0.16s;
+}
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-.section-kicker { color: #9f382f; font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
-.section-kicker.light { color: #e8b5a1; }
-.section-title { margin-top: 14px; font-family: var(--font-serif); font-size: clamp(2.7rem, 5vw, 4.8rem); line-height: .94; letter-spacing: -.065em; }
-.section-title em { color: #9f382f; font-weight: 400; }
-.section-title.light { color: #fbfaf7; }
-.section-title.light em { color: #e8b5a1; }
+.section-kicker {
+  color: #9f382f;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.section-kicker.light {
+  color: #e8b5a1;
+}
+.section-title {
+  margin-top: 14px;
+  font-family: var(--font-serif);
+  font-size: clamp(2.7rem, 5vw, 4.8rem);
+  line-height: 0.94;
+  letter-spacing: -0.065em;
+}
+.section-title em {
+  color: #9f382f;
+  font-weight: 400;
+}
+.section-title.light {
+  color: #fbfaf7;
+}
+.section-title.light em {
+  color: #e8b5a1;
+}
 
-.brand-mark { position: relative; display: inline-flex; width: 28px; height: 21px; align-items: center; }
-.brand-mark span { position: absolute; width: 19px; height: 19px; border: 1.5px solid #262320; border-radius: 50%; }
-.brand-mark span:first-child { left: 0; }
-.brand-mark span:last-child { right: 0; }
+.brand-mark {
+  position: relative;
+  display: inline-flex;
+  width: 28px;
+  height: 21px;
+  align-items: center;
+}
+.brand-mark span {
+  position: absolute;
+  width: 19px;
+  height: 19px;
+  border: 1.5px solid #262320;
+  border-radius: 50%;
+  transition: border-color 0.3s ease;
+}
+.brand-mark span:first-child {
+  left: 0;
+}
+.brand-mark span:last-child {
+  right: 0;
+}
+.dark .brand-mark span {
+  border-color: #f0ece6;
+}
 
-.hero-frame { position: relative; aspect-ratio: 1.34 / 1; overflow: visible; border-radius: 4px; background: #ead9cc; }
-.hero-frame::after { position: absolute; inset: 0; content: ''; background: linear-gradient(180deg, transparent 30%, rgba(38,35,32,.12)); pointer-events: none; }
-.hero-frame img { height: 100%; width: 100%; object-fit: cover; }
-.hero-image-swap { animation: image-swap .7s cubic-bezier(.2,.8,.2,1) both; }
-@keyframes image-swap { from { opacity: 0; transform: scale(1.05); filter: saturate(.7); } to { opacity: 1; transform: scale(1); filter: saturate(1); } }
-.hero-card { position: absolute; right: 5%; bottom: 16px; z-index: 2; width: 34%; padding: 9px 11px; text-align: center; background: rgba(251,250,247,.62); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px); box-shadow: 0 10px 24px rgba(38,35,32,.12); }
+.hero-frame {
+  position: relative;
+  aspect-ratio: 1.34 / 1;
+  overflow: visible;
+  border-radius: 4px;
+  background: #ead9cc;
+}
+.hero-frame::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(180deg, transparent 30%, rgba(38, 35, 32, 0.12));
+  pointer-events: none;
+}
+.hero-frame img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.hero-image-swap {
+  animation: image-swap 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes image-swap {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+    filter: saturate(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: saturate(1);
+  }
+}
+.hero-card {
+  position: absolute;
+  right: 5%;
+  bottom: 16px;
+  z-index: 2;
+  width: 34%;
+  padding: 9px 11px;
+  text-align: center;
+  background: rgba(251, 250, 247, 0.62);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  box-shadow: 0 10px 24px rgba(38, 35, 32, 0.12);
+}
 
-.occasion-card { min-height: 0; overflow: hidden; border: 1px solid rgba(38,35,32,.12); background: #fbfaf7; transition: border-color .35s, transform .35s, box-shadow .35s; }
-.occasion-card:hover, .occasion-card.active { border-color: #9f382f; box-shadow: 0 22px 45px rgba(38,35,32,.12); transform: translateY(-6px); }
-.occasion-card.active span:last-child { color: #9f382f; }
-.occasion-image { position: relative; height: 220px; overflow: hidden; }
-.occasion-image img { height: 100%; width: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.8,.2,1), filter .5s; }
-.occasion-card:hover .occasion-image img, .occasion-card.active .occasion-image img { transform: scale(1.08); filter: saturate(1.08); }
-.occasion-icon { position: absolute; bottom: 16px; left: 16px; display: flex; size: 38px; align-items: center; justify-content: center; border: 3px solid rgba(251,250,247,.9); border-radius: 999px; color: white; box-shadow: 0 8px 18px rgba(38,35,32,.22); }
-.occasion-shine { position: absolute; inset: 0; background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,.3) 48%, transparent 65%); transform: translateX(-120%); transition: transform .8s ease; }
-.occasion-card:hover .occasion-shine { transform: translateX(120%); }
+.occasion-card {
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid rgba(38, 35, 32, 0.12);
+  background: #fbfaf7;
+  transition:
+    border-color 0.35s,
+    transform 0.35s,
+    box-shadow 0.35s,
+    background-color 0.3s;
+}
+.occasion-card:hover,
+.occasion-card.active {
+  border-color: #9f382f;
+  box-shadow: 0 22px 45px rgba(38, 35, 32, 0.12);
+  transform: translateY(-6px);
+}
+.occasion-card.active span:last-child {
+  color: #9f382f;
+}
+.dark .occasion-card {
+  background: #2a2420;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.dark .occasion-card:hover,
+.dark .occasion-card.active {
+  border-color: #9f382f;
+}
+.occasion-image {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+.occasion-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition:
+    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.5s;
+}
+.occasion-card:hover .occasion-image img,
+.occasion-card.active .occasion-image img {
+  transform: scale(1.08);
+  filter: saturate(1.08);
+}
+.occasion-icon {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  size: 38px;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid rgba(251, 250, 247, 0.9);
+  border-radius: 999px;
+  color: white;
+  box-shadow: 0 8px 18px rgba(38, 35, 32, 0.22);
+}
+.occasion-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.3) 48%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.8s ease;
+}
+.occasion-card:hover .occasion-shine {
+  transform: translateX(120%);
+}
 
-.template-card { position: relative; display: flex; min-height: 390px; align-items: center; justify-content: center; overflow: hidden; padding: 28px; color: #262320; }
-.template-inner { width: 75%; padding: 42px 14px; text-align: center; border: 1px solid rgba(38,35,32,.18); }
-.template-adore { background: linear-gradient(145deg, #e9d8c9, #f5eee7); }
-.template-adore .template-inner { background: #f8f2ec; }
-.template-sunlit { background: linear-gradient(145deg, #d88a5d, #f1c38d); }
-.template-sunlit .template-inner { background: rgba(255,246,226,.78); }
-.template-chapter { background: linear-gradient(145deg, #6e8b7b, #c7d6c6); }
-.template-chapter .template-inner { background: #edf2e7; }
-.template-arrow { position: absolute; right: 18px; top: 18px; display: flex; size: 32px; align-items: center; justify-content: center; border-radius: 999px; background: rgba(251,250,247,.7); opacity: 0; transition: opacity .2s; }
-.group:hover .template-arrow { opacity: 1; }
-.template-arrow svg { width: 15px; }
+.template-card {
+  position: relative;
+  display: flex;
+  min-height: 390px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 28px;
+  color: #262320;
+}
+.template-inner {
+  width: 75%;
+  padding: 42px 14px;
+  text-align: center;
+  border: 1px solid rgba(38, 35, 32, 0.18);
+}
+.template-adore {
+  background: linear-gradient(145deg, #e9d8c9, #f5eee7);
+}
+.template-adore .template-inner {
+  background: #f8f2ec;
+}
+.template-sunlit {
+  background: linear-gradient(145deg, #d88a5d, #f1c38d);
+}
+.template-sunlit .template-inner {
+  background: rgba(255, 246, 226, 0.78);
+}
+.template-chapter {
+  background: linear-gradient(145deg, #6e8b7b, #c7d6c6);
+}
+.template-chapter .template-inner {
+  background: #edf2e7;
+}
+.template-arrow {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  display: flex;
+  size: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(251, 250, 247, 0.7);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.group:hover .template-arrow {
+  opacity: 1;
+}
+.template-arrow svg {
+  width: 15px;
+}
 
-.ethiopian-pattern { position: absolute; inset: auto -5% -60% -5%; height: 100%; opacity: .12; background-image: repeating-linear-gradient(45deg, transparent, transparent 28px, #f5d9ca 28px, #f5d9ca 30px), repeating-linear-gradient(-45deg, transparent, transparent 28px, #f5d9ca 28px, #f5d9ca 30px); transform: rotate(-5deg); }
+.ethiopian-pattern {
+  position: absolute;
+  inset: auto -5% -60% -5%;
+  height: 100%;
+  opacity: 0.12;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 28px,
+      #f5d9ca 28px,
+      #f5d9ca 30px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 28px,
+      #f5d9ca 28px,
+      #f5d9ca 30px
+    );
+  transform: rotate(-5deg);
+}
 
 @media (max-width: 640px) {
-  .hero-card { right: 4%; bottom: 12px; width: 54%; padding: 8px 7px; }
-  .hero-card h2 { font-size: 23px; }
-  .template-card { min-height: 330px; }
+  .hero-card {
+    right: 4%;
+    bottom: 12px;
+    width: 54%;
+    padding: 8px 7px;
+  }
+  .hero-card h2 {
+    font-size: 23px;
+  }
+  .template-card {
+    min-height: 330px;
+  }
 }
