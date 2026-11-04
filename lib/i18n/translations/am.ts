@@ -28,11 +28,11 @@ export const am: Translations = {
     titleMain: "ልዩ ጊዜዎ፣",
     titleAccent: "በውብ ግብዣ ተዘጋጅቷል።",
     description:
-      "ለኢትዮጵያውያን በዓላትና ደስታዎች የተዘጋጁ ዲጂታል የግብዣ ካርዶች። ዲዛይን ይምረጡ፣ በራስዎ ስሜት ያሳምሩት፣ ታሪክዎን በአማርኛ፣ በእንግሊዝኛ ወይም በሁለቱም ቋንቋዎች ያጋሩ።",
+      "ለኢትዮጵያውያን በዓላትና ደስታዎች የተዘጋጁ ዲጂታል የግብዣ ካርዶች። ዲዛይን ይምረጡ፣ በራስዎ ስሜት ያሳምሩት፣ ታሪክዎን ከሚወዷቸው ሁሉ ጋር ያጋሩ።",
     createInvitation: "ግብዣዎን ያዘጋጁ",
     exploreTemplates: "አብነቶችን ይመልከቱ",
     badgeDesigns: "10+ ውብ አብነቶች",
-    badgeBilingual: "በሁለት ቋንቋ የቀረበ",
+    badgeBilingual: "ቀላልና ምቹ አጠቃቀም",
     badgePayment: "በቴሌብር / ንግድ ባንክ ይክፈሉ",
     heroCardEyebrow: "ጥሪ",
     heroCardSub: "ለመሰብሰብ የሚገባው ልዩ ጊዜ",
@@ -102,7 +102,7 @@ export const am: Translations = {
       plus: {
         name: "ፕላስ (Plus)",
         desc: "ለታሪክዎ ሰፋ ያለ ቦታ",
-        features: "10 ፎቶዎች · ሁለት ቋንቋ · የፕሮግራም ሰሌዳ",
+        features: "10 ፎቶዎች · ሙሉ ዝርዝር · የፕሮግራም ሰሌዳ",
       },
       premium: {
         name: "ፕሪሚየም (Premium)",
@@ -124,7 +124,7 @@ export const am: Translations = {
     newInvitation: "አዲስ ግብዣ",
     emptyTitle: "የመጀመሪያው ግብዣዎ ይጠብቅዎታል።",
     emptySubtitle:
-      "ውብ ባለሁለት ቋንቋ ግብዣ ያዘጋጁና ልዩ ቀንዎን ከቤተሰብ እና ከወዳጆችዎ ጋር ያካፍሉ።",
+      "ውብ ግብዣ ያዘጋጁና ልዩ ቀንዎን ከቤተሰብ እና ከወዳጆችዎ ጋር ያካፍሉ።",
     createFirstInvitation: "የመጀመሪያዎን ግብዣ ያዘጋጁ",
     status: {
       draft: "ረቂቅ",
@@ -187,7 +187,7 @@ export const am: Translations = {
     updating: "በማደስ ላይ…",
     passwordUpdated: "የይለፍ ቃልዎ በተሳካ ሁኔታ ተቀይሯል።",
     badges: {
-      bilingual: "በሁለት ቋንቋ የቀረበ",
+      bilingual: "ቀላልና ምቹ አጠቃቀም",
       payment: "በቴሌብር / ንግድ ባንክ ይክፈሉ",
       secure: "አስተማማኝና ጥበቃ ያለው",
     },

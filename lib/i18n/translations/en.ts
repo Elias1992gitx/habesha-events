@@ -28,11 +28,11 @@ export const en: Translations = {
     titleMain: "Your moment,",
     titleAccent: "beautifully invited.",
     description:
-      "Digital invitations made for Ethiopian celebrations. Choose a design, make it yours, and share your story in Amharic, English, or both.",
+      "Digital invitations made for Ethiopian celebrations. Choose a design, make it yours, and share your story.",
     createInvitation: "Create your invitation",
     exploreTemplates: "Explore templates",
     badgeDesigns: "10+ refined designs",
-    badgeBilingual: "Bilingual by design",
+    badgeBilingual: "Effortless & elegant",
     badgePayment: "Pay via Telebirr / CBE",
     heroCardEyebrow: "ጥሪ",
     heroCardSub: "A moment worth gathering for",
@@ -102,7 +102,7 @@ export const en: Translations = {
       plus: {
         name: "Plus",
         desc: "More room for your story",
-        features: "10 photos · bilingual · schedule",
+        features: "10 photos · custom details · schedule",
       },
       premium: {
         name: "Premium",
@@ -124,7 +124,7 @@ export const en: Translations = {
     newInvitation: "New invitation",
     emptyTitle: "Your first invitation awaits.",
     emptySubtitle:
-      "Create a beautiful bilingual invitation and share your special day with family and friends.",
+      "Create a beautiful invitation and share your special day with family and friends.",
     createFirstInvitation: "Create your first invitation",
     status: {
       draft: "Draft",
@@ -149,7 +149,8 @@ export const en: Translations = {
   auth: {
     loginTitle: "Welcome",
     loginTitleAccent: "back.",
-    loginSubtitle: "Sign in to continue creating beautiful digital invitations.",
+    loginSubtitle:
+      "Sign in to continue creating beautiful digital invitations.",
     noAccount: "Don't have an account?",
     getStarted: "Get started",
     haveAccount: "Already have an account?",
@@ -187,10 +188,9 @@ export const en: Translations = {
     updating: "Updating…",
     passwordUpdated: "Password updated successfully.",
     badges: {
-      bilingual: "Bilingual by design",
+      bilingual: "Effortless & elegant",
       payment: "Pay via Telebirr / CBE",
       secure: "Secure & private",
     },
   },
 };
-

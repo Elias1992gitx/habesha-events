@@ -36,7 +36,7 @@ function applyHtmlLang(locale: Locale) {
 
 /** Injected into <head> before hydration to prevent mismatch/flash */
 export function LanguageScript() {
-  const script = `(function(){try{var m=document.cookie.match(/(?:^|; )habesha-locale=([^;]*)/);var c=m?decodeURIComponent(m[1]):null;var s=localStorage.getItem('${LOCALE_STORAGE_KEY}');var l=s==='en'||s==='am'?s:c==='en'||c==='am'?c:'en';document.documentElement.lang=l;if(l==='am'){document.documentElement.classList.add('lang-am');}}catch(e){}})();`;
+  const script = `(function(){try{var m=document.cookie.match(/(?:^|; )habesha-locale=([^;]*)/);var c=m?decodeURIComponent(m[1]):null;var s=localStorage.getItem('${LOCALE_STORAGE_KEY}');var l=s==='en'||s==='am'?s:c==='en'||c==='am'?c:'am';document.documentElement.lang=l;if(l==='am'){document.documentElement.classList.add('lang-am');}}catch(e){}})();`;
   return (
     <script
       dangerouslySetInnerHTML={{ __html: script }}

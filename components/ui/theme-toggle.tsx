@@ -4,24 +4,24 @@ import { useTheme } from "@/hooks/use-theme";
 import type { Theme } from "@/hooks/use-theme";
 import { Sun, Moon, Monitor } from "lucide-react";
 
-const CYCLE: Theme[] = ["system", "light", "dark"];
+const CYCLE: Theme[] = ["dark", "light", "system"];
 
 const ICONS: Record<Theme, React.ReactNode> = {
-  system: <Monitor size={15} aria-hidden="true" />,
-  light: <Sun size={15} aria-hidden="true" />,
   dark: <Moon size={15} aria-hidden="true" />,
+  light: <Sun size={15} aria-hidden="true" />,
+  system: <Monitor size={15} aria-hidden="true" />,
 };
 
 const LABELS: Record<Theme, string> = {
-  system: "Switch to light mode",
-  light: "Switch to dark mode",
-  dark: "Switch to system theme",
+  dark: "Switch to light mode",
+  light: "Switch to system theme",
+  system: "Switch to dark mode",
 };
 
 const TITLES: Record<Theme, string> = {
-  system: "System theme",
-  light: "Light mode",
   dark: "Dark mode",
+  light: "Light mode",
+  system: "System theme",
 };
 
 export function ThemeToggle() {

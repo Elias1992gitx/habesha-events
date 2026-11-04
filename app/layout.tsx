@@ -6,7 +6,7 @@ import { LanguageProvider, LanguageScript } from '@/components/language-provider
 
 export const metadata: Metadata = {
   title: 'Habesha Events — Digital invitations for every celebration',
-  description: 'Create beautiful bilingual digital invitations for Ethiopian weddings, birthdays, and graduations.',
+  description: 'Create beautiful digital invitations for Ethiopian weddings, birthdays, and graduations.',
   generator: 'Habesha Events',
   icons: {
     icon: [
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   colorScheme: 'dark light',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#fbfaf7' },
     { media: '(prefers-color-scheme: dark)', color: '#111318' },
+    { media: '(prefers-color-scheme: light)', color: '#fbfaf7' },
   ],
 }
 
@@ -41,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="am" className="dark lang-am" style={{ colorScheme: 'dark' }} suppressHydrationWarning>
       <head>
         <ThemeScript />
         <LanguageScript />

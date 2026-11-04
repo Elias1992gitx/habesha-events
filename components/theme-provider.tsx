@@ -36,7 +36,7 @@ function applyTheme(resolved: ResolvedTheme) {
 
 /** Injected into <head> before hydration to prevent flash of wrong theme */
 export function ThemeScript() {
-  const script = `(function(){try{var s=localStorage.getItem('${STORAGE_KEY}');var t=s==='light'||s==='dark'?s:s==='system'||!s?(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):'light';document.documentElement.classList.add(t);document.documentElement.style.colorScheme=t;}catch(e){}})();`;
+  const script = `(function(){try{var s=localStorage.getItem('${STORAGE_KEY}');var t=s==='light'||s==='dark'?s:s==='system'?(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):'dark';document.documentElement.classList.add(t);document.documentElement.style.colorScheme=t;}catch(e){}})();`;
   return (
     <script
       dangerouslySetInnerHTML={{ __html: script }}
@@ -46,8 +46,8 @@ export function ThemeScript() {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("system");
-  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>("light");
+  const [theme, setThemeState] = useState<Theme>("dark");
+  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>("dark");
 
   // On mount: read from localStorage
   useEffect(() => {
@@ -55,7 +55,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const initial: Theme =
       stored === "light" || stored === "dark" || stored === "system"
         ? stored
-        : "system";
+        : "dark";
     const resolved = resolveTheme(initial);
     setThemeState(initial);
     setResolvedTheme(resolved);
