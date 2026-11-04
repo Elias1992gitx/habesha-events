@@ -8,9 +8,19 @@ import {
   ArrowDownRight,
   ArrowRight,
   ArrowUpRight,
+  Check,
+  CheckCircle2,
+  Copy,
   Heart,
   Menu,
+  MessageSquare,
+  Palette,
+  Pencil,
+  QrCode,
+  Send,
+  Share2,
   Sparkles,
+  Users,
   X,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -56,6 +66,17 @@ export function MarketingHome() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [heroIndex, setHeroIndex] = useState(0);
   const [user, setUser] = useState<User | null>(null);
+  const [activeHop, setActiveHop] = useState<number>(0);
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [hopPreviewStyle, setHopPreviewStyle] = useState<"wedding" | "birthday" | "graduation">("wedding");
+
+  const handleCopyHopLink = () => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText("https://habesha.events/e/abebe-sara");
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2200);
+    }
+  };
 
   const events = [
     {
@@ -113,13 +134,6 @@ export function MarketingHome() {
     }, 4200);
     return () => window.clearInterval(rotation);
   }, []);
-
-  const steps = [
-    { num: "01", title: t.home.steps.step1Title, text: t.home.steps.step1Text },
-    { num: "02", title: t.home.steps.step2Title, text: t.home.steps.step2Text },
-    { num: "03", title: t.home.steps.step3Title, text: t.home.steps.step3Text },
-    { num: "04", title: t.home.steps.step4Title, text: t.home.steps.step4Text },
-  ];
 
   const pricingPlans = [
     { ...t.home.plans.starter, highlighted: false },
@@ -404,35 +418,538 @@ export function MarketingHome() {
         id="how-it-works"
         className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 lg:px-12 lg:py-28"
       >
-        <div className="grid gap-14 lg:grid-cols-[.8fr_1.2fr] lg:gap-24">
-          <div>
-            <p className="section-kicker">{t.home.howKicker}</p>
-            <h2 className="section-title">
-              {t.home.howTitle} <em>{t.home.howTitleAccent}</em>
-            </h2>
-            <p className="mt-6 max-w-[370px] text-sm leading-7 text-[#6c6660] dark:text-[#9b9490]">
-              {t.home.howSubtitle}
-            </p>
-            <Link
-              href={user ? "/dashboard" : "/register"}
-              className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-[#9f382f]"
-            >
-              {t.home.startCreating} <ArrowRight className="size-4" />
-            </Link>
+        {/* Section Header */}
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#9f382f]/20 bg-[#9f382f]/5 px-4 py-1.5 text-xs font-semibold tracking-wider text-[#9f382f] dark:border-[#e8b5a1]/20 dark:bg-[#e8b5a1]/10 dark:text-[#e8b5a1]">
+            <Sparkles className="size-3.5" />
+            <span className="uppercase">{t.home.howKicker}</span>
           </div>
-          <div className="grid gap-8 sm:grid-cols-2">
-            {steps.map(({ num, title, text }) => (
-              <div key={num} className="border-t border-[#262320]/15 pt-5 dark:border-white/10">
-                <span className="font-serif text-4xl text-[#d8c5b5]">
-                  {num}
-                </span>
-                <h3 className="mt-5 font-serif text-2xl tracking-[-0.04em]">
-                  {title}
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-[#6c6660] dark:text-[#9b9490]">{text}</p>
+          <h2
+            className={`mt-4 ${
+              isAmharic
+                ? "font-geez text-3xl font-semibold leading-tight sm:text-4xl lg:text-[44px]"
+                : "font-serif text-3xl tracking-[-0.035em] sm:text-4xl md:text-5xl lg:text-[54px] lg:leading-[1.08]"
+            }`}
+          >
+            {t.home.howTitle}{" "}
+            <em className="font-normal italic text-[#9f382f] dark:text-[#e8b5a1]">
+              {t.home.howTitleAccent}
+            </em>
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#6c6660] dark:text-[#9b9490] sm:text-base">
+            {t.home.howSubtitle}
+          </p>
+        </div>
+
+        {/* Interactive Hop Stepper (Desktop & Tablet) */}
+        <div className="mx-auto mt-12 hidden max-w-4xl grid-cols-4 gap-3 md:grid">
+          {[
+            {
+              hop: "01",
+              title: t.home.steps.step1Title,
+              icon: Palette,
+            },
+            {
+              hop: "02",
+              title: t.home.steps.step2Title,
+              icon: Pencil,
+            },
+            {
+              hop: "03",
+              title: t.home.steps.step3Title,
+              icon: Share2,
+            },
+            {
+              hop: "04",
+              title: t.home.steps.step4Title,
+              icon: CheckCircle2,
+            },
+          ].map((item, idx) => {
+            const Icon = item.icon;
+            const isActive = activeHop === idx;
+            return (
+              <button
+                key={item.hop}
+                type="button"
+                onClick={() => setActiveHop(idx)}
+                className={`flex items-center gap-3 rounded-xl border p-3 text-left transition-all duration-300 ${
+                  isActive
+                    ? "border-[#9f382f] bg-[#9f382f]/5 shadow-sm dark:border-[#e8b5a1] dark:bg-[#e8b5a1]/10"
+                    : "border-[#262320]/10 bg-white/40 hover:border-[#9f382f]/30 dark:border-white/10 dark:bg-white/[0.02] dark:hover:border-white/20"
+                }`}
+              >
+                <div
+                  className={`flex size-8 shrink-0 items-center justify-center rounded-lg text-xs font-semibold ${
+                    isActive
+                      ? "bg-[#9f382f] text-white dark:bg-[#e8b5a1] dark:text-[#1a1612]"
+                      : "bg-[#262320]/5 text-[#6c6660] dark:bg-white/10 dark:text-[#9b9490]"
+                  }`}
+                >
+                  <Icon className="size-4" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-[#9f382f] dark:text-[#e8b5a1]">
+                    {t.home.hopLabel} {item.hop}
+                  </p>
+                  <p
+                    className={`truncate text-xs font-medium ${
+                      isActive
+                        ? "text-[#262320] dark:text-[#f0ece6]"
+                        : "text-[#6c6660] dark:text-[#9b9490]"
+                    }`}
+                  >
+                    {item.title}
+                  </p>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* The 4 Hops Showcase Cards */}
+        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:gap-8">
+          {/* Hop 01: Pick a design */}
+          <div
+            onClick={() => setActiveHop(0)}
+            className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-white/80 p-6 backdrop-blur-md transition-all duration-300 sm:p-8 dark:bg-[#201c18]/80 ${
+              activeHop === 0
+                ? "border-[#9f382f] shadow-lg ring-1 ring-[#9f382f]/30 dark:border-[#e8b5a1] dark:ring-[#e8b5a1]/30"
+                : "border-[#262320]/10 hover:border-[#9f382f]/40 hover:shadow-md dark:border-white/10 dark:hover:border-white/20"
+            }`}
+          >
+            <div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full bg-[#9f382f]/10 px-2.5 py-1 text-xs font-semibold text-[#9f382f] dark:bg-[#e8b5a1]/15 dark:text-[#e8b5a1]">
+                    {t.home.hopLabel} 01
+                  </span>
+                  <span className="text-xs font-medium uppercase tracking-wider text-[#6c6660] dark:text-[#9b9490]">
+                    {t.home.steps.step1Tag}
+                  </span>
+                </div>
+                <div className="flex size-10 items-center justify-center rounded-xl bg-[#9f382f]/10 text-[#9f382f] transition-transform duration-300 group-hover:scale-110 dark:bg-[#e8b5a1]/15 dark:text-[#e8b5a1]">
+                  <Palette className="size-5" />
+                </div>
               </div>
-            ))}
+              <h3
+                className={`mt-5 ${
+                  isAmharic
+                    ? "font-geez text-2xl font-semibold text-[#262320] dark:text-[#f0ece6]"
+                    : "font-serif text-2xl tracking-[-0.03em] text-[#262320] sm:text-3xl dark:text-[#f0ece6]"
+                }`}
+              >
+                {t.home.steps.step1Title}
+              </h3>
+              <p className="mt-2.5 text-sm leading-6 text-[#6c6660] dark:text-[#9b9490]">
+                {t.home.steps.step1Text}
+              </p>
+            </div>
+
+            {/* Interactive Widget 01: Template Style Swatches */}
+            <div className="mt-6 rounded-xl border border-[#262320]/10 bg-[#fbfaf7] p-4 dark:border-white/10 dark:bg-[#1a1612]/70">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#6c6660] dark:text-[#9b9490]">
+                  {t.home.steps.step1Badge}
+                </span>
+                <span className="rounded-full bg-[#9f382f]/10 px-2 py-0.5 text-[10px] font-medium text-[#9f382f] dark:bg-[#e8b5a1]/15 dark:text-[#e8b5a1]">
+                  {t.home.steps.step1PreviewNote}
+                </span>
+              </div>
+
+              {/* Style selector pills */}
+              <div className="mt-3 flex gap-2">
+                {[
+                  { key: "wedding", en: "Wedding", am: "ሠርግ" },
+                  { key: "birthday", en: "Birthday", am: "ልደት" },
+                  { key: "graduation", en: "Graduation", am: "ምርቃት" },
+                ].map((style) => (
+                  <button
+                    key={style.key}
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setHopPreviewStyle(
+                        style.key as "wedding" | "birthday" | "graduation"
+                      );
+                    }}
+                    className={`flex-1 rounded-lg py-1.5 text-center text-xs font-medium transition-all ${
+                      hopPreviewStyle === style.key
+                        ? "bg-[#9f382f] text-white shadow-xs dark:bg-[#e8b5a1] dark:text-[#1a1612]"
+                        : "border border-[#262320]/10 bg-white/60 text-[#6c6660] hover:bg-white dark:border-white/10 dark:bg-white/[0.04] dark:text-[#9b9490] dark:hover:bg-white/[0.08]"
+                    }`}
+                  >
+                    {isAmharic ? style.am : style.en}
+                  </button>
+                ))}
+              </div>
+
+              {/* Dynamic mini preview card */}
+              <div className="mt-3 overflow-hidden rounded-lg border border-[#262320]/10 bg-white p-3.5 shadow-xs dark:border-white/10 dark:bg-[#262320]/90">
+                <div className="flex items-center justify-between text-[11px] text-[#9f382f] dark:text-[#e8b5a1]">
+                  <span className="font-geez font-medium">ጥሪ · INVITATION</span>
+                  <span className="text-[10px] opacity-75">
+                    {hopPreviewStyle === "wedding"
+                      ? isAmharic
+                        ? "ፍቅር · ሠርግ"
+                        : "Romantic · Wedding"
+                      : hopPreviewStyle === "birthday"
+                      ? isAmharic
+                        ? "ደስታ · ልደት"
+                        : "Joyful · Birthday"
+                      : isAmharic
+                      ? "ዘመናዊ · ምርቃት"
+                      : "Modern · Graduation"}
+                  </span>
+                </div>
+                <h4
+                  className={`mt-2 ${
+                    isAmharic
+                      ? "font-geez text-base font-semibold"
+                      : "font-serif text-lg tracking-tight"
+                  } text-[#262320] dark:text-[#f0ece6]`}
+                >
+                  {hopPreviewStyle === "wedding"
+                    ? isAmharic
+                      ? "ሳራ እና ዳዊት"
+                      : "Sara & Dawit"
+                    : hopPreviewStyle === "birthday"
+                    ? isAmharic
+                      ? "የሊያ 30ኛ ዓመት ልደት"
+                      : "Liya turns 30"
+                    : isAmharic
+                    ? "ሚሚ ገብሬ · የ2018 ተመራቂ"
+                    : "Mimi Gebre · Class of 2026"}
+                </h4>
+                <p className="mt-1 text-[11px] text-[#6c6660] dark:text-[#9b9490]">
+                  {hopPreviewStyle === "wedding"
+                    ? isAmharic
+                      ? "መስከረም 14 · ስካይላይት ሆቴል"
+                      : "September 14, 2026 · Skylight Hotel"
+                    : hopPreviewStyle === "birthday"
+                    ? isAmharic
+                      ? "ሰኔ 22 · ግራንድ ቪላ"
+                      : "Saturday, June 22 · Grand Villa"
+                    : isAmharic
+                    ? "ሐምሌ 18 · አዲስ አበባ ዩኒቨርሲቲ"
+                    : "Saturday, July 18 · Addis Ababa University"}
+                </p>
+              </div>
+            </div>
           </div>
+
+          {/* Hop 02: Make it yours */}
+          <div
+            onClick={() => setActiveHop(1)}
+            className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-white/80 p-6 backdrop-blur-md transition-all duration-300 sm:p-8 dark:bg-[#201c18]/80 ${
+              activeHop === 1
+                ? "border-[#9f382f] shadow-lg ring-1 ring-[#9f382f]/30 dark:border-[#e8b5a1] dark:ring-[#e8b5a1]/30"
+                : "border-[#262320]/10 hover:border-[#9f382f]/40 hover:shadow-md dark:border-white/10 dark:hover:border-white/20"
+            }`}
+          >
+            <div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full bg-[#9f382f]/10 px-2.5 py-1 text-xs font-semibold text-[#9f382f] dark:bg-[#e8b5a1]/15 dark:text-[#e8b5a1]">
+                    {t.home.hopLabel} 02
+                  </span>
+                  <span className="text-xs font-medium uppercase tracking-wider text-[#6c6660] dark:text-[#9b9490]">
+                    {t.home.steps.step2Tag}
+                  </span>
+                </div>
+                <div className="flex size-10 items-center justify-center rounded-xl bg-[#9f382f]/10 text-[#9f382f] transition-transform duration-300 group-hover:scale-110 dark:bg-[#e8b5a1]/15 dark:text-[#e8b5a1]">
+                  <Pencil className="size-5" />
+                </div>
+              </div>
+              <h3
+                className={`mt-5 ${
+                  isAmharic
+                    ? "font-geez text-2xl font-semibold text-[#262320] dark:text-[#f0ece6]"
+                    : "font-serif text-2xl tracking-[-0.03em] text-[#262320] sm:text-3xl dark:text-[#f0ece6]"
+                }`}
+              >
+                {t.home.steps.step2Title}
+              </h3>
+              <p className="mt-2.5 text-sm leading-6 text-[#6c6660] dark:text-[#9b9490]">
+                {t.home.steps.step2Text}
+              </p>
+            </div>
+
+            {/* Interactive Widget 02: Live Editor Mockup */}
+            <div className="mt-6 rounded-xl border border-[#262320]/10 bg-[#fbfaf7] p-4 dark:border-white/10 dark:bg-[#1a1612]/70">
+              <div className="flex items-center justify-between pb-2 border-b border-[#262320]/10 dark:border-white/10 text-[11px] text-[#6c6660] dark:text-[#9b9490]">
+                <span className="flex items-center gap-1.5">
+                  <span className="size-2 rounded-full bg-[#9f382f]" />
+                  {t.home.steps.step2Badge}
+                </span>
+                <span className="font-mono text-[10px] text-[#9f382f] dark:text-[#e8b5a1]">
+                  auto-saved ✓
+                </span>
+              </div>
+
+              <div className="mt-3 space-y-2">
+                {/* Field: Names */}
+                <div className="rounded-lg border border-[#262320]/10 bg-white px-3 py-1.5 dark:border-white/10 dark:bg-[#262320]/80">
+                  <p className="text-[10px] uppercase font-semibold text-[#6c6660] dark:text-[#9b9490]">
+                    {isAmharic ? "የባለቤቶች ስም" : "Honorees / Names"}
+                  </p>
+                  <p className="text-xs font-medium text-[#262320] dark:text-[#f0ece6] flex items-center">
+                    {t.home.steps.step2PreviewNames}
+                    <span className="ml-1 inline-block h-3.5 w-[1.5px] animate-pulse bg-[#9f382f] dark:bg-[#e8b5a1]" />
+                  </p>
+                </div>
+
+                {/* Field: Date */}
+                <div className="rounded-lg border border-[#262320]/10 bg-white px-3 py-1.5 dark:border-white/10 dark:bg-[#262320]/80">
+                  <p className="text-[10px] uppercase font-semibold text-[#6c6660] dark:text-[#9b9490]">
+                    {isAmharic ? "ቀንና ሰዓት" : "Date & Time"}
+                  </p>
+                  <p className="text-xs font-medium text-[#262320] dark:text-[#f0ece6]">
+                    {t.home.steps.step2PreviewDate}
+                  </p>
+                </div>
+
+                {/* Field: Location */}
+                <div className="rounded-lg border border-[#262320]/10 bg-white px-3 py-1.5 dark:border-white/10 dark:bg-[#262320]/80">
+                  <p className="text-[10px] uppercase font-semibold text-[#6c6660] dark:text-[#9b9490]">
+                    {isAmharic ? "ቦታና አድራሻ" : "Venue Location"}
+                  </p>
+                  <p className="text-xs font-medium text-[#262320] dark:text-[#f0ece6]">
+                    {t.home.steps.step2PreviewLocation}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Hop 03: Send one link */}
+          <div
+            onClick={() => setActiveHop(2)}
+            className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-white/80 p-6 backdrop-blur-md transition-all duration-300 sm:p-8 dark:bg-[#201c18]/80 ${
+              activeHop === 2
+                ? "border-[#9f382f] shadow-lg ring-1 ring-[#9f382f]/30 dark:border-[#e8b5a1] dark:ring-[#e8b5a1]/30"
+                : "border-[#262320]/10 hover:border-[#9f382f]/40 hover:shadow-md dark:border-white/10 dark:hover:border-white/20"
+            }`}
+          >
+            <div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full bg-[#9f382f]/10 px-2.5 py-1 text-xs font-semibold text-[#9f382f] dark:bg-[#e8b5a1]/15 dark:text-[#e8b5a1]">
+                    {t.home.hopLabel} 03
+                  </span>
+                  <span className="text-xs font-medium uppercase tracking-wider text-[#6c6660] dark:text-[#9b9490]">
+                    {t.home.steps.step3Tag}
+                  </span>
+                </div>
+                <div className="flex size-10 items-center justify-center rounded-xl bg-[#9f382f]/10 text-[#9f382f] transition-transform duration-300 group-hover:scale-110 dark:bg-[#e8b5a1]/15 dark:text-[#e8b5a1]">
+                  <Share2 className="size-5" />
+                </div>
+              </div>
+              <h3
+                className={`mt-5 ${
+                  isAmharic
+                    ? "font-geez text-2xl font-semibold text-[#262320] dark:text-[#f0ece6]"
+                    : "font-serif text-2xl tracking-[-0.03em] text-[#262320] sm:text-3xl dark:text-[#f0ece6]"
+                }`}
+              >
+                {t.home.steps.step3Title}
+              </h3>
+              <p className="mt-2.5 text-sm leading-6 text-[#6c6660] dark:text-[#9b9490]">
+                {t.home.steps.step3Text}
+              </p>
+            </div>
+
+            {/* Interactive Widget 03: Share Link Box & Channel Buttons */}
+            <div className="mt-6 rounded-xl border border-[#262320]/10 bg-[#fbfaf7] p-4 dark:border-white/10 dark:bg-[#1a1612]/70">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#6c6660] dark:text-[#9b9490]">
+                  {t.home.steps.step3PreviewNote}
+                </span>
+                <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400">
+                  {t.home.steps.step3Badge}
+                </span>
+              </div>
+
+              {/* Link Input Bar with Click-to-Copy */}
+              <div className="mt-3 flex items-center justify-between gap-2 rounded-lg border border-[#262320]/10 bg-white p-2 dark:border-white/10 dark:bg-[#262320]/80">
+                <span className="truncate font-mono text-xs text-[#262320] dark:text-[#f0ece6] pl-1">
+                  habesha.events/e/abebe-sara
+                </span>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCopyHopLink();
+                  }}
+                  className={`inline-flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium transition-all ${
+                    copiedLink
+                      ? "bg-emerald-600 text-white"
+                      : "bg-[#9f382f] text-white hover:bg-[#862e26] dark:bg-[#e8b5a1] dark:text-[#1a1612] dark:hover:bg-[#dfa48e]"
+                  }`}
+                >
+                  {copiedLink ? (
+                    <>
+                      <Check className="size-3.5" />
+                      {isAmharic ? "ተገልብጧል!" : "Copied!"}
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="size-3.5" />
+                      {isAmharic ? "ሊንክ ገልብጥ" : "Copy"}
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Channels row */}
+              <div className="mt-3 grid grid-cols-4 gap-2">
+                {[
+                  { label: "Telegram", icon: Send },
+                  { label: "WhatsApp", icon: MessageSquare },
+                  { label: "SMS", icon: Users },
+                  { label: "QR Pass", icon: QrCode },
+                ].map((channel) => {
+                  const ChannelIcon = channel.icon;
+                  return (
+                    <div
+                      key={channel.label}
+                      className="flex flex-col items-center justify-center rounded-lg border border-[#262320]/10 bg-white/70 py-2 text-center dark:border-white/10 dark:bg-white/[0.03]"
+                    >
+                      <ChannelIcon className="size-4 text-[#9f382f] dark:text-[#e8b5a1]" />
+                      <span className="mt-1 text-[10px] font-medium text-[#6c6660] dark:text-[#9b9490]">
+                        {channel.label}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Hop 04: Watch replies land */}
+          <div
+            onClick={() => setActiveHop(3)}
+            className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border bg-white/80 p-6 backdrop-blur-md transition-all duration-300 sm:p-8 dark:bg-[#201c18]/80 ${
+              activeHop === 3
+                ? "border-[#9f382f] shadow-lg ring-1 ring-[#9f382f]/30 dark:border-[#e8b5a1] dark:ring-[#e8b5a1]/30"
+                : "border-[#262320]/10 hover:border-[#9f382f]/40 hover:shadow-md dark:border-white/10 dark:hover:border-white/20"
+            }`}
+          >
+            <div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="rounded-full bg-[#9f382f]/10 px-2.5 py-1 text-xs font-semibold text-[#9f382f] dark:bg-[#e8b5a1]/15 dark:text-[#e8b5a1]">
+                    {t.home.hopLabel} 04
+                  </span>
+                  <span className="text-xs font-medium uppercase tracking-wider text-[#6c6660] dark:text-[#9b9490]">
+                    {t.home.steps.step4Tag}
+                  </span>
+                </div>
+                <div className="flex size-10 items-center justify-center rounded-xl bg-[#9f382f]/10 text-[#9f382f] transition-transform duration-300 group-hover:scale-110 dark:bg-[#e8b5a1]/15 dark:text-[#e8b5a1]">
+                  <CheckCircle2 className="size-5" />
+                </div>
+              </div>
+              <h3
+                className={`mt-5 ${
+                  isAmharic
+                    ? "font-geez text-2xl font-semibold text-[#262320] dark:text-[#f0ece6]"
+                    : "font-serif text-2xl tracking-[-0.03em] text-[#262320] sm:text-3xl dark:text-[#f0ece6]"
+                }`}
+              >
+                {t.home.steps.step4Title}
+              </h3>
+              <p className="mt-2.5 text-sm leading-6 text-[#6c6660] dark:text-[#9b9490]">
+                {t.home.steps.step4Text}
+              </p>
+            </div>
+
+            {/* Interactive Widget 04: Host Desk RSVP Console */}
+            <div className="mt-6 rounded-xl border border-[#262320]/10 bg-[#fbfaf7] p-4 dark:border-white/10 dark:bg-[#1a1612]/70">
+              {/* RSVP status count pills */}
+              <div className="flex flex-wrap items-center justify-between gap-1.5">
+                <span className="rounded-md bg-emerald-500/10 px-2 py-1 text-[11px] font-semibold text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400">
+                  ✓ {t.home.steps.step4Attending}
+                </span>
+                <span className="rounded-md bg-amber-500/10 px-2 py-1 text-[11px] font-semibold text-amber-600 dark:bg-amber-500/20 dark:text-amber-400">
+                  ? {t.home.steps.step4Maybe}
+                </span>
+                <span className="rounded-md bg-[#262320]/5 px-2 py-1 text-[11px] font-semibold text-[#6c6660] dark:bg-white/10 dark:text-[#9b9490]">
+                  ✕ {t.home.steps.step4Declined}
+                </span>
+              </div>
+
+              {/* Progress bar */}
+              <div className="mt-3">
+                <div className="flex justify-between text-[10px] text-[#6c6660] dark:text-[#9b9490]">
+                  <span>{isAmharic ? "የምላሽ መጠን" : "Response rate"}</span>
+                  <span className="font-semibold text-[#262320] dark:text-[#f0ece6]">
+                    88% (166 / 190)
+                  </span>
+                </div>
+                <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-[#262320]/10 dark:bg-white/10">
+                  <div className="h-full w-[88%] rounded-full bg-[#9f382f] dark:bg-[#e8b5a1]" />
+                </div>
+              </div>
+
+              {/* Live guest replies stream */}
+              <div className="mt-3 space-y-2">
+                <div className="flex items-center gap-2 rounded-lg border border-[#262320]/10 bg-white p-2 dark:border-white/10 dark:bg-[#262320]/80">
+                  <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[#9f382f]/10 text-[10px] font-bold text-[#9f382f] dark:bg-[#e8b5a1]/20 dark:text-[#e8b5a1]">
+                    ST
+                  </div>
+                  <div className="min-w-0 flex-1 text-[11px]">
+                    <p className="font-semibold text-[#262320] dark:text-[#f0ece6]">
+                      {t.home.steps.step4Guest1}
+                    </p>
+                    <p className="truncate text-[10px] text-[#6c6660] dark:text-[#9b9490]">
+                      {t.home.steps.step4Guest1Note}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 rounded-lg border border-[#262320]/10 bg-white p-2 dark:border-white/10 dark:bg-[#262320]/80">
+                  <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[#9f382f]/10 text-[10px] font-bold text-[#9f382f] dark:bg-[#e8b5a1]/20 dark:text-[#e8b5a1]">
+                    DH
+                  </div>
+                  <div className="min-w-0 flex-1 text-[11px]">
+                    <p className="font-semibold text-[#262320] dark:text-[#f0ece6]">
+                      {t.home.steps.step4Guest2}
+                    </p>
+                    <p className="truncate text-[10px] text-[#6c6660] dark:text-[#9b9490]">
+                      {t.home.steps.step4Guest2Note}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom CTA Banner */}
+        <div className="mt-14 flex flex-col items-center justify-between gap-6 rounded-2xl border border-[#262320]/10 bg-gradient-to-r from-[#9f382f]/5 via-transparent to-[#9f382f]/5 p-6 text-center sm:flex-row sm:p-8 sm:text-left dark:border-white/10 dark:from-[#e8b5a1]/5 dark:to-transparent">
+          <div>
+            <h4
+              className={`${
+                isAmharic
+                  ? "font-geez font-semibold text-xl sm:text-2xl"
+                  : "font-serif text-xl sm:text-2xl"
+              } text-[#262320] dark:text-[#f0ece6]`}
+            >
+              {isAmharic
+                ? "የበዓልዎን ግብዣ አሁኑኑ ማዘጋጀት ይጀምሩ"
+                : "Ready to invite your loved ones?"}
+            </h4>
+            <p className="mt-1 text-sm text-[#6c6660] dark:text-[#9b9490]">
+              {isAmharic
+                ? "በነጻ ይሞክሩ። ዝግጁ ሲሆኑ ብቻ ይክፈሉና ያትሙ።"
+                : "Free to preview and try designs. Pay only when you are ready to publish."}
+            </p>
+          </div>
+          <Link
+            href={user ? "/dashboard" : "/register"}
+            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#9f382f] px-6 py-3 text-sm font-medium text-white shadow-md transition-all hover:bg-[#862e26] hover:shadow-lg dark:bg-[#e8b5a1] dark:text-[#1a1612] dark:hover:bg-[#dfa48e]"
+          >
+            {t.home.startCreating} <ArrowRight className="size-4" />
+          </Link>
         </div>
       </section>
 
